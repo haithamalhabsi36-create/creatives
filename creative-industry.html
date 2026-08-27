@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الصناعة الإبداعية | Creative Industry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  :root {
+    --green-dark: #1a5c2e;
+    --green-mid: #2d8a4e;
+    --green-light: #7ac043;
+    --green-pale: #e8f5e9;
+    --cream: #f5f5f0;
+    --white: #ffffff;
+    --dark: #111a12;
+    --gray: #6b7c6d;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  #cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--green-light);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+    mix-blend-mode: multiply;
+  }
+  #cursor-ring {
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 2px solid var(--green-mid);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.6;
+  }
+  body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 24px; height: 24px; background: var(--green-dark); }
+  body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width: 60px; height: 60px; opacity: 0.3; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.2rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(245,245,240,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(122,192,67,0.2);
+    transition: all 0.4s;
+  }
+  nav.scrolled { padding: 0.8rem 5%; box-shadow: 0 4px 30px rgba(29,92,46,0.1); }
+  .nav-logo { display: flex; align-items: center; gap: 0.6rem; }
+  .nav-logo-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 14px; color: white;
+    letter-spacing: -1px;
+  }
+  .nav-logo-text { font-size: 1rem; font-weight: 700; color: var(--green-dark); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--gray); font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; right: 0;
+    width: 0; height: 2px;
+    background: var(--green-light);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--green-dark); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    padding: 0.55rem 1.4rem;
+    background: var(--green-dark);
+    color: white; border: none; border-radius: 50px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: none; transition: all 0.3s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(122,192,67,0.4); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh; min-height: 600px;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  #hero-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 8%;
+    max-width: 700px;
+  }
+  .hero-tag {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border: 1px solid var(--green-light);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    color: var(--green-mid);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .hero-title {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .hero-title span { color: var(--green-light); }
+  .hero-subtitle {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: var(--gray);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(20px);
+  }
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
+    background: var(--green-dark);
+    color: white; border: none; border-radius: 50px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: none; transition: all 0.3s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--green-light); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(122,192,67,0.45); }
+  .btn-outline {
+    padding: 0.9rem 2.2rem;
+    background: transparent;
+    color: var(--green-dark);
+    border: 2px solid var(--green-dark);
+    border-radius: 50px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: none; transition: all 0.3s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--green-dark); color: white; transform: translateY(-3px); }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    color: var(--gray); font-size: 0.7rem; letter-spacing: 2px;
+    text-transform: uppercase; z-index: 2; opacity: 0;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--green-light), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 8%; }
+  .section-tag {
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--green-light); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 900; color: var(--dark);
+    line-height: 1.2; margin-bottom: 1.2rem;
+  }
+  .section-title span { color: var(--green-mid); }
+  .section-desc {
+    font-size: 1rem; color: var(--gray);
+    line-height: 1.9; max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative; height: 500px;
+  }
+  .about-card-3d {
+    width: 100%; height: 100%;
+    perspective: 1000px;
+  }
+  .about-card-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1.5rem; padding: 3rem;
+    box-shadow: 0 30px 80px rgba(29,92,46,0.3);
+    overflow: hidden;
+  }
+  .about-card-inner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .about-stat {
+    text-align: center; z-index: 1;
+  }
+  .about-stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: var(--green-light); line-height: 1;
+  }
+  .about-stat-label { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 0.3rem; }
+  .about-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.2); }
+  .about-text { }
+  .about-features {
+    margin-top: 2rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    padding: 1rem;
+    border: 1px solid var(--green-pale);
+    border-radius: 12px;
+    transition: all 0.3s;
+  }
+  .feature-item:hover { border-color: var(--green-light); background: var(--green-pale); transform: translateY(-3px); }
+  .feature-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--green-light), var(--green-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .feature-text h4 { font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+  .feature-text p { font-size: 0.75rem; color: var(--gray); line-height: 1.5; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--cream); }
+  .services-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    position: relative; overflow: hidden;
+    border-radius: 20px;
+    background: white;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(122,192,67,0.15);
+    transition: all 0.4s;
+    transform-style: preserve-3d;
+    cursor: none;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(122,192,67,0.15), transparent);
+    border-radius: 0 20px 0 80px;
+    transition: all 0.4s;
+  }
+  .service-card:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 0 25px 60px rgba(29,92,46,0.15);
+    border-color: var(--green-light);
+  }
+  .service-card:hover::before {
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(122,192,67,0.25), transparent);
+  }
+  .service-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem; font-weight: 900;
+    color: rgba(122,192,67,0.12);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .service-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    transition: transform 0.4s;
+    box-shadow: 0 8px 20px rgba(29,92,46,0.25);
+  }
+  .service-card:hover .service-icon { transform: rotate(10deg) scale(1.1); }
+  .service-title { font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 0.6rem; }
+  .service-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── VISION/MISSION ── */
+  #vision {
+    background: var(--green-dark);
+    position: relative; overflow: hidden;
+  }
+  #vision::before {
+    content: '';
+    position: absolute; top: -50%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(122,192,67,0.15), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    position: relative; z-index: 1;
+  }
+  .vision-card {
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid rgba(122,192,67,0.2);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s;
+  }
+  .vision-card:hover { border-color: var(--green-light); background: rgba(255,255,255,0.07); transform: translateY(-5px); }
+  .vision-label {
+    font-size: 0.7rem; letter-spacing: 3px;
+    text-transform: uppercase; font-weight: 700;
+    color: var(--green-light); margin-bottom: 1rem;
+  }
+  .vision-title { font-size: 1.5rem; font-weight: 900; color: white; margin-bottom: 1rem; }
+  .vision-text { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.9; }
+  .vision-icon {
+    font-size: 2.5rem; margin-bottom: 1.2rem;
+  }
+
+  /* ── GOALS ── */
+  #goals { background: white; }
+  .goals-list {
+    margin-top: 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+  }
+  .goal-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--green-pale);
+    transition: all 0.3s;
+    opacity: 0; transform: translateX(30px);
+  }
+  .goal-item:hover { border-color: var(--green-light); background: var(--green-pale); transform: translateX(0) translateY(-3px) !important; }
+  .goal-bullet {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--green-light);
+    flex-shrink: 0; margin-top: 5px;
+    box-shadow: 0 0 0 4px rgba(122,192,67,0.2);
+  }
+  .goal-text { font-size: 0.9rem; color: var(--dark); line-height: 1.7; font-weight: 400; }
+
+  /* ── WHY US ── */
+  #why { background: var(--cream); }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    margin-top: 3rem;
+  }
+  .why-card {
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid transparent;
+    transition: all 0.4s;
+    position: relative; overflow: hidden;
+    cursor: none;
+  }
+  .why-card::after {
+    content: '';
+    position: absolute; bottom: 0; right: 0;
+    width: 60px; height: 4px;
+    background: var(--green-light);
+    border-radius: 2px 0 0 0;
+    transition: width 0.4s;
+  }
+  .why-card:hover { border-color: var(--green-light); transform: translateY(-8px); box-shadow: 0 20px 50px rgba(29,92,46,0.12); }
+  .why-card:hover::after { width: 100%; }
+  .why-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
+  .why-title { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.7rem; }
+  .why-text { font-size: 0.85rem; color: var(--gray); line-height: 1.8; }
+
+  /* ── CLIENTS ── */
+  #clients {
+    background: white;
+    text-align: center;
+  }
+  .clients-header { text-align: center; margin-bottom: 3rem; }
+  .clients-track-wrapper {
+    overflow: hidden;
+    padding: 1rem 0;
+  }
+  .clients-track {
+    display: flex; gap: 2.5rem;
+    animation: scroll-track 18s linear infinite;
+    width: max-content;
+  }
+  .clients-track:hover { animation-play-state: paused; }
+  @keyframes scroll-track {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .client-logo {
+    min-width: 140px; height: 80px;
+    background: var(--cream);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(122,192,67,0.15);
+    font-weight: 700; font-size: 0.85rem;
+    color: var(--green-dark);
+    transition: all 0.3s;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+    cursor: none;
+  }
+  .client-logo:hover { background: var(--green-pale); border-color: var(--green-light); transform: translateY(-4px); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--green-dark);
+    position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute; bottom: -30%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(122,192,67,0.12), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+  .contact-text .section-title { color: white; }
+  .contact-text .section-desc { color: rgba(255,255,255,0.6); }
+  .contact-details { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    color: rgba(255,255,255,0.8); font-size: 0.9rem;
+  }
+  .contact-item-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: rgba(122,192,67,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+    border: 1px solid rgba(122,192,67,0.3);
+  }
+  .contact-form {
+    background: rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid rgba(122,192,67,0.2);
+    backdrop-filter: blur(10px);
+  }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-label { display: block; font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; font-weight: 500; }
+  .form-input {
+    width: 100%; padding: 0.85rem 1.1rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(122,192,67,0.2);
+    border-radius: 10px;
+    color: white; font-size: 0.9rem;
+    font-family: 'Tajawal', sans-serif;
+    outline: none; transition: border-color 0.3s;
+  }
+  .form-input::placeholder { color: rgba(255,255,255,0.3); }
+  .form-input:focus { border-color: var(--green-light); background: rgba(255,255,255,0.12); }
+  .form-input[rows] { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%; padding: 1rem;
+    background: linear-gradient(135deg, var(--green-light), var(--green-mid));
+    color: white; border: none;
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: none; transition: all 0.3s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,192,67,0.5); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 2rem 8%;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+  .footer-social { display: flex; gap: 0.8rem; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none; font-size: 0.85rem;
+    transition: all 0.3s; cursor: none;
+  }
+  .social-btn:hover { background: var(--green-mid); border-color: var(--green-mid); color: white; transform: translateY(-2px); }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: none; padding: 5px; background: none; border: none;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--green-dark);
+    border-radius: 2px; transition: all 0.3s;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    #about { grid-template-columns: 1fr; }
+    .about-visual { height: 300px; }
+    .vision-grid { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 5rem 6%; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .goals-list { grid-template-columns: 1fr; }
+    .about-features { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; align-items: flex-start; }
+    #cursor, #cursor-ring { display: none; }
+    body { cursor: default; }
+    .nav-cta, .btn-primary, .btn-outline, .form-submit, .service-card,
+    .why-card, .feature-item, .goal-item, .vision-card { cursor: pointer; }
+  }
+  @media (max-width: 480px) {
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
+
+  /* ── FLOATING MOBILE MENU ── */
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 70px; right: 0; left: 0;
+    background: white;
+    padding: 1.5rem 6%;
+    border-bottom: 1px solid var(--green-pale);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 99;
+    flex-direction: column; gap: 1.2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--dark); font-size: 1rem;
+    font-weight: 600; text-decoration: none;
+    padding: 0.5rem 0; border-bottom: 1px solid var(--green-pale);
+  }
+
+  /* ── LOADER ── */
+  #loader {
+    position: fixed; inset: 0;
+    background: var(--green-dark);
+    z-index: 10000;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    transition: opacity 0.6s, visibility 0.6s;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+  .loader-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem; font-weight: 900;
+    color: var(--green-light); letter-spacing: 3px;
+  }
+  .loader-bar {
+    width: 200px; height: 2px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 1px; overflow: hidden;
+  }
+  .loader-bar-fill {
+    height: 100%;
+    background: var(--green-light);
+    border-radius: 1px;
+    animation: loadFill 1.2s ease forwards;
+  }
+  @keyframes loadFill {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  .reveal { opacity: 0; transform: translateY(40px); }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">CI</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">CI</div>
+    <div class="nav-logo-text">الصناعة الإبداعية</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#vision">رؤيتنا</a></li>
+    <li><a href="#goals">أهدافنا</a></li>
+    <li><a href="#clients">عملاؤنا</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">تواصل معنا</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">من نحن</a>
+  <a href="#services" onclick="closeMobileMenu()">خدماتنا</a>
+  <a href="#vision" onclick="closeMobileMenu()">رؤيتنا</a>
+  <a href="#goals" onclick="closeMobileMenu()">أهدافنا</a>
+  <a href="#clients" onclick="closeMobileMenu()">عملاؤنا</a>
+  <a href="#contact" onclick="closeMobileMenu()">تواصل معنا</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag">🏭 صناعة عمانية إبداعية لا مثيل تجربه لها</div>
+    <h1 class="hero-title">الصناعة<br><span>الإبداعية</span></h1>
+    <p class="hero-subtitle">مصنع عماني متخصص في توفير خطوط الإنتاج الصناعية والمنتجات البلاستيكية بأعلى معايير الجودة العالمية</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">اكتشف خدماتنا</a>
+      <a href="#contact" class="btn-outline">تواصل معنا</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-card-3d" id="aboutCard3d">
+      <div class="about-card-inner">
+        <div class="about-stat">
+          <div class="about-stat-num">+10</div>
+          <div class="about-stat-label">سنوات خبرة</div>
+        </div>
+        <div class="about-divider"></div>
+        <div class="about-stat">
+          <div class="about-stat-num">100%</div>
+          <div class="about-stat-label">كوادر عمانية</div>
+        </div>
+        <div class="about-divider"></div>
+        <div class="about-stat">
+          <div class="about-stat-num">🏆</div>
+          <div class="about-stat-label">معايير عالمية</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="section-tag">من نحن</div>
+    <h2 class="section-title">شركة <span>عمانية</span> بكوادر متميزة</h2>
+    <p class="section-desc">الصناعة الإبداعية شركة بإدارة عمانية وكادر مميز من مهندسين عمانيين ذوي خبرة أكثر من عشر سنوات. جاءت لتلائم الخطط الاستراتيجية الصناعية في السلطنة، وتساهم في وصولها إلى مصاف الدول المتقدمة.</p>
+    <div class="about-features">
+      <div class="feature-item">
+        <div class="feature-icon">🏭</div>
+        <div class="feature-text">
+          <h4>معايير عالمية</h4>
+          <p>وحدات صناعية وفق أحدث المواصفات</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⚙️</div>
+        <div class="feature-text">
+          <h4>تقنيات متطورة</h4>
+          <p>ابتكار صناعي وتقنية معلومات</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-text">
+          <h4>صحة وسلامة</h4>
+          <p>بيئة عمل آمنة ومعتمدة</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-text">
+          <h4>انتشار عالمي</h4>
+          <p>أسواق محلية وإقليمية ودولية</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag reveal">خدماتنا</div>
+      <h2 class="section-title reveal">ما نقدمه <span>لك</span></h2>
+    </div>
+    <p class="section-desc reveal" style="max-width:350px">نقدم حلولاً صناعية احترافية تسهّل الأداء على المصانع والعلامات التجارية</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">🏗️</div>
+      <div class="service-title">الصناعة البلاستيكية</div>
+      <p class="service-desc">تصنيع الأغطية والعلب ومواد التغليف المختلفة بأعلى مستويات الجودة والدقة</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <div class="service-icon">🔧</div>
+      <div class="service-title">خطوط الإنتاج</div>
+      <p class="service-desc">توفير وتشغيل خطوط الإنتاج الصناعية المتكاملة بأحدث المعدات العالمية</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <div class="service-icon">🎨</div>
+      <div class="service-title">تصميم المنتجات</div>
+      <p class="service-desc">تطوير وتصميم المنتجات البلاستيكية باستخدام أفضل التقنيات الصناعية الحديثة</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <div class="service-icon">📦</div>
+      <div class="service-title">الهوية التجارية</div>
+      <p class="service-desc">إنتاج منتجات تحمل هويتك التجارية بمعدات عالية الدقة وبأساليب خاصة ومميزة</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">05</div>
+      <div class="service-icon">💡</div>
+      <div class="service-title">الاستشارات الصناعية</div>
+      <p class="service-desc">خدمات استشارية متخصصة تساهم في تطوير القطاع الصناعي وتحفيز الإبداع</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">06</div>
+      <div class="service-icon">🚀</div>
+      <div class="service-title">إدارة المصانع</div>
+      <p class="service-desc">إدارة وتشغيل المصانع على أرض الواقع بأفضل الأساليب التشغيلية والتقنيات</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISION / MISSION -->
+<section id="vision">
+  <div class="vision-grid">
+    <div class="vision-card reveal">
+      <div class="vision-icon">🎯</div>
+      <div class="vision-label">Vision — رؤيتنا</div>
+      <h3 class="vision-title">تكوين مجموعة شركات صناعية متكاملة</h3>
+      <p class="vision-text">ناجحة اقتصادياً، متقدمة علمياً وإدارياً وصناعياً، لخدمة المجتمع والمساهمة في التنمية المستدامة.</p>
+    </div>
+    <div class="vision-card reveal">
+      <div class="vision-icon">📜</div>
+      <div class="vision-label">Mission — رسالتنا</div>
+      <h3 class="vision-title">حلول صناعية احترافية</h3>
+      <p class="vision-text">تقديم حلول صناعية احترافية تسهّل الأداء على المصانع وعلى العلامات التجارية، بأحدث التقنيات وأعلى معايير الجودة.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="section-tag reveal">أهدافنا</div>
+  <h2 class="section-title reveal">نسعى لتحقيق <span>التميز</span></h2>
+  <div class="goals-list">
+    <div class="goal-item">
+      <div class="goal-bullet"></div>
+      <p class="goal-text">نساهم في زرع الثقة في المنتج العماني ومنحه المجال للمنافسة في الأسواق العالمية</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-bullet"></div>
+      <p class="goal-text">المساهمة في التحول بوتيرة أسرع نحو الثورة الصناعية الرابعة في السلطنة</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-bullet"></div>
+      <p class="goal-text">المساهمة في وصول السلطنة إلى مصاف الدول المتقدمة وتحفيز التقدم في الصناعات التحويلية</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-bullet"></div>
+      <p class="goal-text">بناء وتطوير المصانع بأحدث التقنيات وبأعلى معايير الجودة العالمية</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-bullet"></div>
+      <p class="goal-text">تطوير المنتجات البلاستيكية وتصميمها باستخدام أفضل التقنيات الصناعية</p>
+    </div>
+    <div class="goal-item">
+      <div class="goal-bullet"></div>
+      <p class="goal-text">تقديم الاستشارات الصناعية التي تسهم في تطوير المجال الصناعي في السلطنة</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-tag reveal">لماذا نحن؟</div>
+  <h2 class="section-title reveal">ما يميز <span>الصناعة الإبداعية</span></h2>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">🇴🇲</div>
+      <div class="why-title">كوادر عمانية متخصصة</div>
+      <p class="why-text">فريق عمل عماني متكامل ذو خبرة ومدرب على تنفيذ الأعمال في أقرب وقت ممكن</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">⚡</div>
+      <div class="why-title">تنفيذ سريع ودقيق</div>
+      <p class="why-text">معدات عالية الدقة والأمان قابلة للتطوير في أي لحظة دون البدء من جديد</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">🌱</div>
+      <div class="why-title">دعم التنمية المستدامة</div>
+      <p class="why-text">نساهم في تحقيق أهداف التنمية الاقتصادية بالسلطنة ورفع الميزان التجاري العماني</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="clients-header reveal">
+    <div class="section-tag">عملاؤنا</div>
+    <h2 class="section-title">شركاء <span>النجاح</span></h2>
+  </div>
+  <div class="clients-track-wrapper">
+    <div class="clients-track" id="clientsTrack">
+      <div class="client-logo">OMALEEN أومالين</div>
+      <div class="client-logo">SPIRIT HUB</div>
+      <div class="client-logo">FVPB</div>
+      <div class="client-logo">THAMAR ثمر</div>
+      <div class="client-logo">Tea Corner</div>
+      <div class="client-logo">Tea Time</div>
+      <!-- Duplicate for infinite -->
+      <div class="client-logo">OMALEEN أومالين</div>
+      <div class="client-logo">SPIRIT HUB</div>
+      <div class="client-logo">FVPB</div>
+      <div class="client-logo">THAMAR ثمر</div>
+      <div class="client-logo">Tea Corner</div>
+      <div class="client-logo">Tea Time</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-text reveal">
+      <div class="section-tag" style="color:var(--green-light)">تواصل معنا</div>
+      <h2 class="section-title" style="color:white">هل لديك مشروع<br><span style="color:var(--green-light)">في ذهنك؟</span></h2>
+      <p class="section-desc" style="color:rgba(255,255,255,0.6)">نحن هنا لتحويل أفكارك الصناعية إلى واقع ملموس بأعلى معايير الجودة</p>
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <span>سلطنة عُمان / مسقط</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <span dir="ltr">+968 9983 6368 &nbsp;|&nbsp; +968 9513 6368</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <span>creativeindustry33@hotmail.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-group">
+        <label class="form-label">الاسم الكامل</label>
+        <input class="form-input" type="text" placeholder="أدخل اسمك">
+      </div>
+      <div class="form-group">
+        <label class="form-label">البريد الإلكتروني</label>
+        <input class="form-input" type="email" placeholder="example@email.com" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label class="form-label">رقم الهاتف</label>
+        <input class="form-input" type="tel" placeholder="+968 XXXX XXXX" dir="ltr">
+      </div>
+      <div class="form-group">
+        <label class="form-label">رسالتك</label>
+        <textarea class="form-input" rows="3" placeholder="اكتب رسالتك هنا..."></textarea>
+      </div>
+      <button class="form-submit">إرسال الرسالة ✦</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 الصناعة الإبداعية — Creative Industry. جميع الحقوق محفوظة.</div>
+  <div class="footer-social">
+    <a href="#" class="social-btn">f</a>
+    <a href="#" class="social-btn">in</a>
+    <a href="#" class="social-btn">ig</a>
+    <a href="#" class="social-btn">tw</a>
+  </div>
+</footer>
+
+<script>
+// ── LOADER ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    initHeroAnimations();
+  }, 1400);
+});
+
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// ── THREE.JS HERO ──
+const canvas = document.getElementById('hero-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+camera.position.z = 5;
+
+function resizeRenderer() {
+  const w = canvas.parentElement.clientWidth;
+  const h = canvas.parentElement.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+resizeRenderer();
+window.addEventListener('resize', resizeRenderer);
+
+// Floating geometric shapes
+const shapes = [];
+const geoms = [
+  new THREE.TorusGeometry(0.5, 0.15, 16, 50),
+  new THREE.OctahedronGeometry(0.5),
+  new THREE.TetrahedronGeometry(0.5),
+  new THREE.TorusGeometry(0.3, 0.1, 12, 40),
+  new THREE.OctahedronGeometry(0.35),
+];
+const greenColors = [0x7ac043, 0x2d8a4e, 0x1a5c2e, 0xa8d870, 0x4caf50];
+
+for (let i = 0; i < 18; i++) {
+  const geom = geoms[i % geoms.length];
+  const mat = new THREE.MeshPhongMaterial({
+    color: greenColors[i % greenColors.length],
+    wireframe: i % 3 === 0,
+    transparent: true,
+    opacity: 0.15 + Math.random() * 0.25,
+    shininess: 80,
+  });
+  const mesh = new THREE.Mesh(geom, mat);
+  mesh.position.set(
+    (Math.random() - 0.5) * 14,
+    (Math.random() - 0.5) * 10,
+    (Math.random() - 0.5) * 4 - 2
+  );
+  mesh.rotation.set(Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, 0);
+  mesh.userData = {
+    rotSpeedX: (Math.random() - 0.5) * 0.006,
+    rotSpeedY: (Math.random() - 0.5) * 0.008,
+    floatSpeed: 0.3 + Math.random() * 0.5,
+    floatOffset: Math.random() * Math.PI * 2,
+    baseY: mesh.position.y,
+  };
+  scene.add(mesh);
+  shapes.push(mesh);
+}
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambientLight);
+const dirLight = new THREE.DirectionalLight(0x7ac043, 0.8);
+dirLight.position.set(5, 5, 5);
+scene.add(dirLight);
+const dirLight2 = new THREE.DirectionalLight(0x1a5c2e, 0.5);
+dirLight2.position.set(-5, -3, -5);
+scene.add(dirLight2);
+
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+});
+
+const clock = new THREE.Clock();
+function animateScene() {
+  requestAnimationFrame(animateScene);
+  const t = clock.getElapsedTime();
+  shapes.forEach(m => {
+    m.rotation.x += m.userData.rotSpeedX;
+    m.rotation.y += m.userData.rotSpeedY;
+    m.position.y = m.userData.baseY + Math.sin(t * m.userData.floatSpeed + m.userData.floatOffset) * 0.3;
+  });
+  camera.position.x += (mouseX * 0.3 - camera.position.x) * 0.05;
+  camera.position.y += (mouseY * 0.2 - camera.position.y) * 0.05;
+  camera.lookAt(scene.position);
+  renderer.render(scene, camera);
+}
+animateScene();
+
+// ── GSAP HERO ──
+function initHeroAnimations() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.to('.hero-tag',    { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' });
+  gsap.to('.hero-title',  { opacity: 1, y: 0, duration: 0.9, delay: 0.45, ease: 'power3.out' });
+  gsap.to('.hero-subtitle',{ opacity: 1, y: 0, duration: 0.9, delay: 0.65, ease: 'power3.out' });
+  gsap.to('.hero-btns',   { opacity: 1, y: 0, duration: 0.8, delay: 0.85, ease: 'power3.out' });
+  gsap.to('.hero-scroll', { opacity: 1, duration: 0.8, delay: 1.3 });
+
+  // Scroll reveals
+  gsap.utils.toArray('.reveal').forEach((el, i) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1, y: 0, duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+        delay: (i % 3) * 0.1,
+      }
+    );
+  });
+
+  // Goals items
+  gsap.utils.toArray('.goal-item').forEach((el, i) => {
+    gsap.to(el, {
+      opacity: 1, x: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      delay: i * 0.1,
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 88%',
+        toggleActions: 'play none none none',
+      }
+    });
+  });
+}
+
+// ── 3D CARD TILT ──
+const card3d = document.getElementById('aboutCard3d');
+if (card3d) {
+  card3d.addEventListener('mousemove', e => {
+    const rect = card3d.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card3d.querySelector('.about-card-inner').style.transform =
+      `rotateY(${x * 20}deg) rotateX(${-y * 15}deg) scale3d(1.03,1.03,1.03)`;
+  });
+  card3d.addEventListener('mouseleave', () => {
+    card3d.querySelector('.about-card-inner').style.transform = '';
+  });
+}
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── HAMBURGER ──
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ── SERVICE CARDS 3D TILT ──
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `translateY(-8px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+</script>
+</body>
+</html>
