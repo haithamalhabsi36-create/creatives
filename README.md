@@ -117,7 +117,7 @@ This project is deployed on **Vercel**. To deploy your own instance:
  
 - 📍 Muscat, Sultanate of Oman
 - 📞 +968 9513 63688
-- ✉️ info@creativesindustry.com
+- ✉️ in@creativesindustry.com
 - 💬 [WhatsApp](https://wa.me/96895136368)
 ---
  
