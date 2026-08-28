@@ -116,7 +116,7 @@ This project is deployed on **Vercel**. To deploy your own instance:
 **Creative Industry — الصناعة الإبداعية**
  
 - 📍 Muscat, Sultanate of Oman
-- 📞 +968 9513 6368
+- 📞 +968 9513 63688
 - ✉️ info@creativesindustry.com
 - 💬 [WhatsApp](https://wa.me/96895136368)
 ---
