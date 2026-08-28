@@ -8,7 +8,7 @@
  
 ## About the Project
  
-Creative Industry is an Omani-managed factory with a specialized team of experienced Omani engineers. The company provides industrial production lines and plastic products for brands and factories, contributing to Oman's economic development and industrial advancement goals.
+Creatives Industry is an Omani-managed factory with a specialized team of experienced Omani engineers. The company provides industrial production lines and plastic products for brands and factories, contributing to Oman's economic development and industrial advancement goals.
  
 This website serves as the company's digital presence — showcasing its services, products, vision, and contact information — in both **Arabic** and **English**, with full RTL support for Arabic.
  
