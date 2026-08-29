@@ -12,8 +12,8 @@ export const products = [
     slug: "pp-strap",
     image: ppStrapImg,
     name: {
-      ar: "شريط PP (PP Strap)",
-      en: "PP Strap",
+      ar: "شريط ربط بولي بروبلين (PP Strap)",
+      en: "Polypropylene (PP) Strapping",
     },
     summary: {
       ar: "شريط بولي بروبلين خفيف ومرن واقتصادي لتثبيت وربط الكراتين والمنتجات.",
@@ -88,8 +88,8 @@ export const products = [
     slug: "ring-holder",
     image: ringHolderImg,
     name: {
-      ar: "سدادات رولات الورق (Ring Holder)",
-      en: "Ring Holder",
+      ar: "حلقة تثبيت رولات الورق (Paper Roll Ring Holder)",
+      en: "Paper Roll Ring Holder",
     },
     summary: {
       ar: "مكوّن تغليف مصمم لتثبيت ودعم رولات أوراق الكرتون أثناء النقل والتخزين والمناولة.",
@@ -158,8 +158,8 @@ export const products = [
     slug: "core-plug",
     image: corePlugImg,
     name: {
-      ar: "سدادة لب رول الألومنيوم (Core Plug)",
-      en: "Plastic Aluminum Coil Core Plug",
+      ar: "سدادة بلاستيكية للبّ رولات الألومنيوم (Core Plug)",
+      en: "Aluminum Coil Core Plug",
     },
     summary: {
       ar: "سدادة بلاستيكية متينة مصممة لتثبيت ودعم رولات الألومنيوم وحماية أطرافها.",
@@ -226,8 +226,8 @@ export const products = [
     slug: "pp-strap-clip",
     image: ppStrapClipImg,
     name: {
-      ar: "📦 مشبك ربط شريط PP (PP Strap Clip)",
-      en: "PP Strap Clip",
+      ar: "مشبك معدني لشريط ربط PP (PP Strapping Seal)",
+      en: "PP Strapping Seal",
     },
     summary: {
       ar: "مشبك معدني عالي الجودة لتثبيت وربط أشرطة البولي بروبلين بإحكام.",
@@ -294,8 +294,8 @@ export const products = [
     slug: "pet-strap",
     image: petStrapImg,
     name: {
-      ar: "شريط ربط PET (PET Strap)",
-      en: "PET Strap",
+      ar: "شريط ربط بوليستر (PET Strap)",
+      en: "Polyester (PET) Strapping",
     },
     summary: {
       ar: "شريط ربط عالي القوة مصنوع من مادة PET، بديل قوي وآمن للشرائط المعدنية.",
@@ -374,7 +374,7 @@ export const products = [
     slug: "stretch-film",
     image: stretchFilmImg,
     name: {
-      ar: "فيلم التغليف والتمدد (Stretch Film)",
+      ar: "فيلم تغليف مطاطي (Stretch Film)",
       en: "Stretch Film",
     },
     summary: {
@@ -452,8 +452,8 @@ export const products = [
     slug: "strapping-tool-set",
     image: strappingToolSetImg,
     name: {
-      ar: "طقم أدوات ربط يدوي لشريط PP & PET",
-      en: "Manual PP & PET Strapping Tool Set",
+      ar: "طقم شد وكبس يدوي لأشرطة PP وPET",
+      en: "Manual PP/PET Strapping Tool Set",
     },
     summary: {
       ar: "أدوات يدوية متينة لشد وتثبيت شرائط PP وPET، مناسبة للكراتين والبالتات والمنتجات الصناعية.",
@@ -496,8 +496,8 @@ export const products = [
     slug: "strap-sealing-machine",
     image: strapSealingMachineImg,
     name: {
-      ar: "ماكينة لحام يدوية لشريط PET/PP",
-      en: "Manual PET/PP Strap Sealing Machine",
+      ar: "أداة ربط محمولة لأشرطة PP وPET",
+      en: "Portable PP/PET Strapping Tool",
     },
     summary: {
       ar: "ماكينة لحام يدوية عملية لتثبيت شرائط PET/PP بسرعة وقوة على الكراتين والأحمال الصناعية.",
