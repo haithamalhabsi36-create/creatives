@@ -239,20 +239,20 @@ export const products = [
           "مشبك معدني عالي الجودة مصمم لتثبيت وربط أشرطة البولي بروبلين (PP) بإحكام، يُستخدم في أعمال التغليف والتعبئة لضمان ثبات الشحنات أثناء النقل والتخزين.",
         description2:
           "يتميز المشبك بقوة تحمل عالية وقدرة ممتازة على تثبيت الشريط بعد الكبس، مما يمنع الانزلاق أو الفك، ويضمن حماية المنتجات من التلف أو التفكك.",
-        featuresTitle: "المميزات",
+        featuresTitle: "أهم المميزات",
         features: [
           "مصنوع من معدن قوي مقاوم للضغط",
           "تصميم عملي يضمن تثبيت محكم للشريط",
           "سهل الاستخدام مع أدوات الكبس (Strapping Tool)",
           "مناسب لمختلف أحجام أشرطة PP",
-          "مقاوم للصدأ والتآكل",
+          "متوفر بتشطيبات معدنية مختلفة حسب الموديل ومتطلبات الاستخدام",
         ],
         usesTitle: "الاستخدامات",
         uses: [
           "تغليف الكراتين والبضائع",
           "تأمين الشحنات أثناء النقل",
           "الاستخدام في المصانع والمخازن",
-          "ربط البالات والمنتجات الثقيلة والمتوسطة",
+          "ربط المنتجات الخفيفة والمتوسطة وفق مقاس الشريط والمشبك",
         ],
         howTitle: "طريقة الاستخدام",
         how: [
@@ -266,20 +266,20 @@ export const products = [
           "A high-quality metal clip designed to secure polypropylene (PP) straps tightly. It is used in packaging to keep loads stable during transport and storage.",
         description2:
           "Built for strength and reliable gripping after crimping, preventing slip or release and protecting products from damage.",
-        featuresTitle: "Features",
+        featuresTitle: "Key Features",
         features: [
           "Strong metal construction resistant to pressure",
           "Practical design for firm strap locking",
           "Easy to use with strapping tools",
           "Suitable for various PP strap sizes",
-          "Resistant to rust and corrosion",
+          "Available with different metal finishes depending on the model and application",
         ],
         usesTitle: "Applications",
         uses: [
           "Packaging cartons and goods",
           "Securing loads during transport",
           "Factories and warehouses",
-          "Bundling medium and heavy products",
+          "Bundling light- and medium-duty products according to strap and seal size",
         ],
         howTitle: "How to Use",
         how: [
@@ -298,8 +298,8 @@ export const products = [
       en: "Polyester (PET) Strapping",
     },
     summary: {
-      ar: "شريط ربط عالي القوة مصنوع من مادة PET، بديل قوي وآمن للشرائط المعدنية.",
-      en: "High-strength PET strapping, a safe and durable alternative to steel strapping.",
+      ar: "شريط ربط بوليستر عالي القوة لتثبيت الأحمال المتوسطة والثقيلة، وبديل مناسب للشرائط الفولاذية في العديد من التطبيقات.",
+      en: "High-strength PET strapping for securing medium- and heavy-duty loads, offering a suitable alternative to steel strapping in many applications.",
     },
     details: {
       ar: {
@@ -318,7 +318,7 @@ export const products = [
           "أكثر أمانًا في التعامل مقارنة بالشرائط الفولاذية",
           "مناسب لآلات الربط اليدوية ونصف الأوتوماتيكية والأوتوماتيكية",
           "ثبات ممتاز في الأبعاد والأداء المستمر",
-          "قابل لإعادة التدوير وصديق للبيئة",
+          "قابل لإعادة التدوير وفق أنظمة إعادة التدوير المحلية",
           "مناسب للاستخدام الداخلي والخارجي",
         ],
         usesTitle: "الاستخدامات",
@@ -351,7 +351,7 @@ export const products = [
           "Safer to handle compared with traditional steel strapping",
           "Suitable for manual, semi-automatic, and automatic strapping machines",
           "Excellent dimensional stability and consistent performance",
-          "Recyclable and environmentally friendly",
+          "Recyclable where suitable local recycling facilities are available",
           "Suitable for both indoor and outdoor applications",
         ],
         usesTitle: "Applications",
@@ -500,15 +500,15 @@ export const products = [
       en: "Portable PP/PET Strapping Tool",
     },
     summary: {
-      ar: "ماكينة لحام يدوية عملية لتثبيت شرائط PET/PP بسرعة وقوة على الكراتين والأحمال الصناعية.",
-      en: "Practical manual sealing machine for fast, strong PET/PP strap sealing on cartons and industrial loads.",
+      ar: "أداة ربط محمولة لشد ولحام وقص أشرطة PP وPET بسرعة، بحسب مواصفات الموديل.",
+      en: "Portable strapping tool for fast tensioning, friction-welding, and cutting of PP and PET straps, subject to model specifications.",
     },
     details: {
       ar: {
         description:
-          "ماكينة لحام شريط PET اليدوية هي حل عملي وفعال لتثبيت وربط المنتجات والكراتين باستخدام شريط التغليف البلاستيكي. سهلة التشغيل وتوفر لحامًا سريعًا وقويًا، مما يجعلها مناسبة لمختلف تطبيقات التغليف.",
+          "أداة ربط محمولة لتثبيت الكراتين والبالتات والأحمال الصناعية باستخدام أشرطة PP أو PET. تقوم بالشد واللحام الاحتكاكي والقص في دورة تشغيل واحدة، بحسب مواصفات الموديل، مما يساعد على إنجاز أعمال الربط بسرعة وثبات.",
         description2:
-          "نوفر الماكينة بمواصفات ومقاسات مختلفة تناسب أنواع وأحجام الشرائط المتعددة، مع حلول تغليف مناسبة حسب متطلبات كل تطبيق.",
+          "تتوفر موديلات تناسب عروض وسماكات مختلفة من الشرائط، مع اختلاف قوة الشد وطريقة التشغيل ومصدر الطاقة من موديل لآخر. يُرجى تأكيد مواصفات الشريط والتطبيق قبل الطلب لضمان اختيار الأداة المناسبة.",
         featuresTitle: "المميزات",
         features: [
           "مناسبة لشريط PET وشريط PP حسب الموديل",
@@ -531,9 +531,9 @@ export const products = [
       },
       en: {
         description:
-          "The Manual PET Strap Sealing Machine is a practical and efficient solution for securing and bundling products and cartons using plastic strapping. It is easy to operate and provides fast and strong sealing, making it suitable for various packaging applications.",
+          "A portable strapping tool for securing cartons, pallets, and industrial loads with PP or PET strap. Depending on the model, it tensions, friction-welds, and cuts the strap in one operating cycle for fast and consistent load securing.",
         description2:
-          "We provide the machine in different specifications and sizes to suit various strap types and sizes, with suitable packaging solutions based on the application requirements.",
+          "Models are available for different strap widths and thicknesses, with tension force, operating method, and power source varying by model. Strap and application specifications should be confirmed before ordering to ensure correct tool selection.",
         featuresTitle: "Features",
         features: [
           "Suitable for PET Strap and PP Strap, depending on the model",
