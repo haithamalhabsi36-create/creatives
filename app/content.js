@@ -23,7 +23,7 @@ export const content = {
       toArabic: "عربي",
     },
     hero: {
-      tag: "🏭 صناعة عمانية إبداعية لا لها",
+      tag: "🏭 صناعة عمانية إبداعية لا مثيل لها",
       titleMain: "الصناعة",
       titleHighlight: "الإبداعية",
       subtitle:
