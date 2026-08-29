@@ -5,7 +5,7 @@ export const content = {
       short: "CI",
     },
     nav: {
-      about: "من ",
+      about: "about: "من نحن",",
       services: "خدماتنا",
       products: "منتجاتنا",
       vision: "رؤيتنا",
