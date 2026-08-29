@@ -78,6 +78,8 @@ export default function Products({ t, lang }) {
                 sizes="(max-width: 768px) 90vw, 320px"
                 quality={95}
               />
+              {/* Debug overlay: shows the product slug so we can identify which image file is used */}
+              <span className="debug-slug">{product.slug}</span>
             </motion.div>
             <motion.div
               className="product-name"
@@ -133,6 +135,7 @@ export default function Products({ t, lang }) {
                     sizes="(max-width: 768px) 90vw, 520px"
                     priority
                   />
+                  <span className="debug-slug modal">{selectedProduct.slug}</span>
                 </motion.div>
                 <div className="product-modal-content">
                   <motion.h3
