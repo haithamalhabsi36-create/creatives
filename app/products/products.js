@@ -88,7 +88,7 @@ export const products = [
     slug: "ring-holder",
     image: ringHolderImg,
     name: {
-      ar: "حامل رولات الكرتون (Ring Holder)",
+      ar: "سدادات رولات الورق (Ring Holder)",
       en: "Ring Holder",
     },
     summary: {
