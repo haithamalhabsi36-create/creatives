@@ -5,7 +5,7 @@ export const content = {
       short: "CI",
     },
     nav: {
-      about: "من نحن",
+      about: "من ",
       services: "خدماتنا",
       products: "منتجاتنا",
       vision: "رؤيتنا",
@@ -23,11 +23,11 @@ export const content = {
       toArabic: "عربي",
     },
     hero: {
-      tag: "🏭 صناعة عمانية إبداعية لامثيل لها",
+      tag: "🏭 صناعة عمانية إبداعية لا لها",
       titleMain: "الصناعة",
       titleHighlight: "الإبداعية",
       subtitle:
-        "مصنع عماني متخصص في توفير خطوط الإنتاج الصناعية والمنتجات البلاستيكية بأعلى معايير الجودة العالمية",
+        "مصنع عمان في توفير خطوط الإنتاج الصناعية والمنتجات البلاستيكية بأعلى معايير الجودة العالمية",
       primary: "اكتشف منتجاتنا",
       secondary: "تواصل معنا",
       scroll: "مرر",
@@ -37,8 +37,7 @@ export const content = {
       titleMain: "شركة",
       titleHighlight: "عمانية",
       titleRest: "بكوادر متميزة",
-      desc:
-        "الصناعة الإبداعية شركة بإدارة عمانية وكادر مميز من مهندسين عمانيين ذوي خبرة أكثر من عشر سنوات. جاءت فكرة الشركة لتلائم الخطط الاستراتيجية الصناعية في السلطنة، لتساهم في وصولها إلى مصاف الدول المتقدمة وتحفّز التقدم في الصناعات التحويلية الوطنية. نحن مصنع مختص في توفير خطوط الإنتاج الصناعية مع توفير المنتجات البلاستيكية للعلامات التجارية، ونساهم في تحقيق أهداف التنمية الاقتصادية عبر تلبية احتياجات السوق المحلي والمصانع الوطنية مع السعي للتوسع إقليميًا وعالميًا.",
+      desc: "الصناعة الإبداعية شركة بإدارة عمانية وكادر مميز من مهندسين عمانيين ذوي خبرة أكثر من عشر سنوات. جاءت فكرة الشركة لتلائم الخطط الاستراتيجية الصناعية في السلطنة، لتساهم في وصولها إلى مصاف الدول المتقدمة وتحفّز التقدم في الصناعات التحويلية الوطنية. نحن مصنع مختص في توفير خطوط الإنتاج الصناعية مع توفير المنتجات البلاستيكية للعلامات التجارية، ونساهم في تحقيق أهداف التنمية الاقتصادية عبر تلبية احتياجات السوق المحلي والمصانع الوطنية مع السعي للتوسع إقليميًا وعالميًا.",
       stats: [
         { value: "+10", label: "سنوات خبرة" },
         { value: "100%", label: "كوادر عمانية" },
@@ -105,15 +104,13 @@ export const content = {
           icon: "🎯",
           label: "رؤيتنا",
           title: "تكوين مجموعة شركات صناعية متكاملة",
-          text:
-            "ناجحة اقتصادياً، متقدمة علمياً وإدارياً وصناعياً، لخدمة المجتمع والمساهمة في التنمية المستدامة.",
+          text: "ناجحة اقتصادياً، متقدمة علمياً وإدارياً وصناعياً، لخدمة المجتمع والمساهمة في التنمية المستدامة.",
         },
         {
           icon: "📜",
           label: "رسالتنا",
           title: "حلول صناعية احترافية",
-          text:
-            "تقديم حلول صناعية احترافية تسهّل الأداء على المصانع وعلى العلامات التجارية، بأحدث التقنيات وأعلى معايير الجودة.",
+          text: "تقديم حلول صناعية احترافية تسهّل الأداء على المصانع وعلى العلامات التجارية، بأحدث التقنيات وأعلى معايير الجودة.",
         },
       ],
     },
@@ -242,7 +239,7 @@ export const content = {
     },
     hero: {
       tag: "🏭 Unique Omani creative manufacturing",
-      titleMain: "Creative",
+      titleMain: "Creatives",
       titleHighlight: "Industry",
       subtitle:
         "An Omani factory specialized in production lines and plastic products with the highest global quality standards",
@@ -255,8 +252,7 @@ export const content = {
       titleMain: "An",
       titleHighlight: "Omani",
       titleRest: "company with outstanding talent",
-      desc:
-        "Creative Industry is an Omani-managed company with a distinguished team of Omani engineers with over ten years of experience. The company was established to align with the Sultanate's industrial strategy, supporting its advancement and the growth of national manufacturing industries. We are a factory specialized in providing industrial production lines along with plastic products for brands, serving the local market and national factories while expanding regionally and globally.",
+      desc: "Creative Industry is an Omani-managed company with a distinguished team of Omani engineers with over ten years of experience. The company was established to align with the Sultanate's industrial strategy, supporting its advancement and the growth of national manufacturing industries. We are a factory specialized in providing industrial production lines along with plastic products for brands, serving the local market and national factories while expanding regionally and globally.",
       stats: [
         { value: "+10", label: "Years Experience" },
         { value: "100%", label: "Omani Team" },
@@ -323,15 +319,13 @@ export const content = {
           icon: "🎯",
           label: "Vision",
           title: "Building an integrated group of industrial companies",
-          text:
-            "Economically successful and scientifically, administratively, and industrially advanced—serving society and contributing to sustainable development.",
+          text: "Economically successful and scientifically, administratively, and industrially advanced—serving society and contributing to sustainable development.",
         },
         {
           icon: "📜",
           label: "Mission",
           title: "Professional industrial solutions",
-          text:
-            "Delivering professional industrial solutions that simplify operations for factories and brands with the latest technologies and highest quality standards.",
+          text: "Delivering professional industrial solutions that simplify operations for factories and brands with the latest technologies and highest quality standards.",
         },
       ],
     },
